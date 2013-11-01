@@ -1,0 +1,162 @@
+html { height: 100%; }
+body { height: 100%; margin: 0; padding: 0 }
+#container {
+	height: 100%;
+	position:relative;
+	font-family: "Open Sans";
+}
+#map-canvas { height: 100%; }
+#control {
+	position: absolute;
+	text-align: center;
+	height: 81.5%;
+	top: 18.5%;
+	z-index: 200;
+	/*left: 5%;*/
+	background-color: white;
+	/*box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 4px 15px -5px rgba(0,0,0,0.0);*/
+}
+.subtext {
+	text-align: left;
+	padding: 10px;
+	border: 5px;
+}
+.subtext legend {
+	font-size: 0.72em;
+}
+.subtext input {
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	outline: none;
+	border: none;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+.subtext input:focus {
+	border-bottom-color: #4A8CF7;
+}
+.subtext .alpha-marker {
+	height:1.4em;
+	margin-left: -1.5%;
+	margin-bottom: -1%;
+}
+.subtext .alpha-marker:hover {
+	cursor: pointer;
+}
+
+#control .submit {
+	padding: 4%;
+	width: 72%;
+	background-color: #FFF;
+	border: 1px solid #EEE;
+}
+
+#mode_travel {
+	width: 100%;
+}
+
+#control .mode-icon {
+	display: inline-block;
+	width:20px;
+	height:20px;
+	margin-left: 5px;
+	margin-right: 5px;
+	background-size: 20px 276px;
+}
+
+#mode-travel quote {
+	display: inline-block;
+	font-variant: small-caps;
+	height: 20px;
+	font-weight: lighter;
+	margin-bottom: 10px;
+	margin-left: 7%;
+	vertical-align: middle;
+}
+
+#mode-icon-walk {
+	background-image: url("icons/modes.png");
+	background-position: 20px 156px;
+}
+
+#mode-icon-car {
+	background-image: url("icons/modes.png");
+	background-position: 20px 235px;
+}
+
+#infobox{
+	z-index: 200;
+	position: absolute;
+	top:0px;
+	left:0px;
+	background-color: white;
+	width: 100%;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 4px 15px -5px rgba(0,0,0,0.0);
+}
+
+#infobox h1 {
+	margin-top: 20px;
+	font-weight: lighter;
+	padding-left: 3%;
+}
+
+#infobox ul {
+	margin-top: 5px;
+	list-style: none;
+}
+
+#infobox .split{
+	font-weight: lighter;
+}
+
+#infobox ul li {
+	width: 23%;
+	text-align: center;
+	display: inline-block;
+}
+
+#infobox ul li h3 {
+	width: 100%;
+	text-align: left;
+	display: inline-block;
+	padding-right: 10px;
+	margin: 0px;
+}
+
+#infobox .link:hover {
+	cursor: pointer;
+	color:blue;
+}
+.eclipse {
+	position:absolute;
+	z-index:101;
+	width: 100%;
+	height:0%;
+	background-color: white;
+}
+.contents {
+	width: 79%;
+	position: relative;
+	left:21%;
+	top:21%;
+}
+
+.contents h2 {
+	width: 45%;
+	font-size: 2.1em;
+	font-weight: lighter;
+	border-bottom: 1px solid #333;
+}
+
+.classOverride {
+	border : 0px solid white;
+}
+
+.classOverride ul {
+	border : 0px solid black !important;
+	border-bottom-width: 1px !important;
+	border-bottom-style: solid !important;
+	background : none !important; 
+}
