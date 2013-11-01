@@ -30,7 +30,7 @@ function typeIconUrl(type_t) {
 			url="restaurant.png"
 			break;
 		default:
-			url="letter_x.png"
+			url=""
 	}
 	return "icons/"+url;
 }
@@ -57,7 +57,6 @@ function initialize() {
 			data_array=JSON.parse(data);
 			markers = [];
 			for (i in data_array){
-				
 				var latlng = new google.maps.LatLng(data_array[i]["latitude"], data_array[i]["longitude"]);
 				markers[i] = new google.maps.Marker(
 									{
@@ -136,6 +135,7 @@ function direct() {
 			directionsDisplay.setDirections(result);
 		}
 	});
+	updateDirections(directionsDisplay);
 
 }
 

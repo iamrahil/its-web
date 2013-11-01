@@ -55,48 +55,54 @@
 						<input type="text" onfocus="focusB();"/>
 						<img class="alpha-marker" src="icons/letter_b.png" onclick="focusB();" />
 					</fieldset>
-					<input type="submit" class="submit" value="Get Directions" onclick="direct();"/>
 					<div id="mode-travel">
 						<quote>Mode</quote>
 						<span class="mode-icon" id="mode-icon-walk"></span>
 						<span class="mode-icon" id="mode-icon-car"></span>
 					</div>
-					<fieldset id="categories">
-						<label>Categories</label>
-						<!-- TODO REMOVE TABLES-->
-						<table id="cat_table">
-							<tr id="D">
-								<td><img/></td>
-								<td>Departments</td>
-								<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
-							</tr>
-							<tr id="H">
-								<td><img/></td>
-								<td>Hotels</td>
-								<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
-							</tr>
-							<tr id="A">
-								<td><img/></td>
-								<td>Academic Area</td>
-								<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
-							</tr>
-							<tr id="E">
-								<td><img/></td>
-								<td>Eateries</td>
-								<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
-							</tr>
-							<tr id="D">
-								<td><img/></td>
-								<td>Departments</td>
-								<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
-							</tr>
-							<script type="text/javascript">
-								$("#cat_table img").each(function(elem){
-									$(this).attr("src",typeIconUrl($(this).parent().parent().attr("id")));
-								})
-							</script>
-						</table>
+					<input type="submit" class="submit" value="Get Directions" onclick="direct();"/>
+					<fieldset class="subtext">
+						<!-- <label>Directions</label> -->
+						<div id="directions"></div>
 					</fieldset>
+					<div id="categorize">
+						<div onclick='$("#categories").animate({height:"toggle"})'>Categories</div>
+						<fieldset id="categories">
+							<!-- TODO REMOVE TABLES-->
+							<table id="cat_table">
+								<tr id="D">
+									<td><img/></td>
+									<td>Departments</td>
+									<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
+								</tr>
+								<tr id="H">
+									<td><img/></td>
+									<td>Hotels</td>
+									<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
+								</tr>
+								<tr id="A">
+									<td><img/></td>
+									<td>Academic Area</td>
+									<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
+								</tr>
+								<tr id="E">
+									<td><img/></td>
+									<td>Eateries</td>
+									<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
+								</tr>
+								<tr id="D">
+									<td><img/></td>
+									<td>Departments</td>
+									<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
+								</tr>
+								<script type="text/javascript">
+									$("#cat_table img").each(function(elem){
+										$(this).attr("src",typeIconUrl($(this).parent().parent().attr("id")));
+									})
+								</script>
+							</table>
+						</fieldset>
+					</div>
 				</div>
 			</div>
 	</body>

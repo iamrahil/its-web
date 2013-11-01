@@ -160,3 +160,24 @@ body { height: 100%; margin: 0; padding: 0 }
 	border-bottom-style: solid !important;
 	background : none !important; 
 }
+
+#categories {
+	position: relative;
+	right: -98%;
+	bottom: 5%;
+	background: inherit;
+	border-top-right-radius: 4%;
+	border-bottom-right-radius: 4%;
+	border : none;
+
+}
+#categorize {
+	background: inherit;
+	position: absolute;
+	bottom: 0;
+}
+#categorize div{
+	width: 100%;
+	position: absolute;
+	bottom: 5%;
+}
