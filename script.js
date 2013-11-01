@@ -57,12 +57,14 @@ function initialize() {
 			data_array=JSON.parse(data);
 			markers = [];
 			for (i in data_array){
+				
 				var latlng = new google.maps.LatLng(data_array[i]["latitude"], data_array[i]["longitude"]);
 				markers[i] = new google.maps.Marker(
 									{
 										position : latlng,
 										map : map,
 										title : data_array[i]["name"].toString(),
+										type_t : data_array[i]["type"].toString(),
 										icon : typeIconUrl(data_array[i]["type"].toString())
 									}
 								);
@@ -135,4 +137,13 @@ function direct() {
 		}
 	});
 
+}
+
+function toggleMarkers(element) {
+	type_t=$(element).parent().parent().attr("id");
+	for (flag in markers) {
+		if(markers[flag].type_t==type_t) {
+			markers[flag].setVisible(element.checked);
+		}
+	}	
 }
