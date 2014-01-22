@@ -1,33 +1,59 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="fonts/list.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/select2.css">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/style2.css">
 		<script src="js/jquery.min.js"></script>
 		<script src="js/select2.js"></script>
 		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
 		<script type="text/javascript"
 		      src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyAJD6fLqhNgsIPyqMAhofYjcVQlKjVBEvA&sensor=true">
 		</script>
-		<script type="text/javascript" src="js/script.js"></script>
 	</head>
 	<body>
 		<div id="crap" style="z-index:1000;position:fixed;right:0px;top:0px;width:100px;height:100px;background-color:transparent;" onclick="call();">
 		</div>
-		<div id="container">
-			<div id="infobox">
+		<div id="container" class="container" style="height:100%;">
+			<div id="infobox" class="row">
 				<h1><span class="split">IIT Bombay </span> Campus Map</h1>
-				<ul>
+				<!-- <ul class="row">
 					<li><h3>Visitor Information System</h3></li>
 					<li><span class="link" onclick="twinkle('about');">About</span></li>
 					<li><span class="link" onclick="twinkle('help');">Help</span></li>
 					<li><span class="link" onclick="twinkle('resources');">Resources</span></li>
-				</ul>
-				
+				</ul> -->
+				<nav class="navbar navbar-default" role="navigation">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">Nav</a>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Map</a></li>
+							<li><a href="#" onclick="twinkle('about');">About</a></li>
+							<li><a href="#" onclick="twinkle('about');">Help</a></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">IIT Bombay</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Civil Dept. IITB</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
 			</div>
-			<div class="eclipse" id="about">
+			<!-- <div class="eclipse" id="about">
 				<div class="contents">
 					<h2>About the project</h2>
 					<p>Lorem Ipsum Sienor</p>
@@ -38,77 +64,76 @@
 					<h2>How to Use</h2>
 					<p>Lorem Ipsum Sienor</p>
 				</div>
-			</div>
-			<div class="eclipse" id="resources">
-				<div class="contents">
-					<h2>Useful Resources</h2>
-					<p>Lorem Ipsum Sienor</p>
-				</div>
-			</div>
-			<div id="map-canvas"></div>
-			<div id="control">
-				<fieldset id="start-location" class="subtext">
-					<legend>Origin:</legend>
-					<!-- <input type="hidden" onfocus="focusA();"/> -->
-					<select class="selectors" id="origin_select" name="origin">
-						<optgroup label=""><option value=0 selected>Select Origin</option></optgroup>
-						<optgroup class="selectorsgroup" label=""></optgroup>
-					</select>
-					<img class="alpha-marker" src="icons/letter_a.png" onclick="focusA();" />
-				</fieldset>
-				<fieldset id="end-location" class="subtext">
-					<legend>Destination:</legend>
-					<select class="selectors" id="destination_select" name="destination">
-						<optgroup label=""><option value=0 selected>Select Destination</option></optgroup>
-						<optgroup class="selectorsgroup" label=""></optgroup>
-					</select>
-					<!-- <input type="text" onfocus="focusB();"/> -->
-					<img class="alpha-marker" src="icons/letter_b.png" onclick="focusB();" />
-				</fieldset>
-				<div id="mode-travel">
-					<quote>Mode</quote>
-					<span class="mode-icon" id="mode-icon-walk" onclick="toggler('walk');"></span>
-					<span class="mode-icon" id="mode-icon-car" onclick="toggler('car');"></span>
-				</div>
-				<input type="submit" class="submit" value="Get Directions" onclick="direct();"/>
-				<fieldset class="subtext">
-					<!-- <label>Directions</label> -->
-					<div id="directions"></div`>
-				</fieldset>
-				<div id="categorize">
-					<div onclick='$("#categories").animate({height:"toggle"})'>Categories</div>
-					<fieldset id="categories">
-						<!-- TODO REMOVE TABLES-->
-						<table id="cat_table">
-							<tr id="D">
-								<td><img/></td>
-								<td>Departments</td>
-								<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
-							</tr>
-							<tr id="H">
-								<td><img/></td>
-								<td>Hostels</td>
-								<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
-							</tr>
-							<tr id="A">
-								<td><img/></td>
-								<td>Academic Area</td>
-								<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
-							</tr>
-							<tr id="E">
-								<td><img/></td>
-								<td>Eateries</td>
-								<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
-							</tr>
-							<script type="text/javascript">
-								$("#cat_table img").each(function(elem){
-									$(this).attr("src",typeIconUrl($(this).parent().parent().attr("id")));
-								})
-							</script>
-						</table>
+			</div> -->
+			<div id="bottom-row" class="row">
+				<div id="control" class="col-md-2 col-xs-1">
+					<fieldset id="start-location" class="subtext">
+						<legend>Origin:</legend>
+						<!-- <input type="hidden" onfocus="focusA();"/> -->
+						<select class="selectors" id="origin_select" name="origin">
+							<optgroup label=""><option value=0 selected>Select Origin</option></optgroup>
+							<optgroup class="selectorsgroup" label=""></optgroup>
+						</select>
+						<img class="alpha-marker" src="icons/letter_a.png" onclick="focusA();" />
 					</fieldset>
+					<fieldset id="end-location" class="subtext">
+						<legend>Destination:</legend>
+						<select class="selectors" id="destination_select" name="destination">
+							<optgroup label=""><option value=0 selected>Select Destination</option></optgroup>
+							<optgroup class="selectorsgroup" label=""></optgroup>
+						</select>
+						<!-- <input type="text" onfocus="focusB();"/> -->
+						<img class="alpha-marker" src="icons/letter_b.png" onclick="focusB();" />
+					</fieldset>
+					<div id="mode-travel">
+						<quote>Mode</quote>
+						<span class="mode-icon" id="mode-icon-walk" onclick="toggler('walk');"></span>
+						<span class="mode-icon" id="mode-icon-car" onclick="toggler('car');"></span>
+					</div>
+					<input type="submit" class="submit" value="Get Directions" onclick="direct();"/>
+					<fieldset class="subtext">
+						<!-- <label>Directions</label> -->
+						<div id="directions"></div`>
+					</fieldset>
+					<div id="categorize">
+						<div onclick='$("#categories").animate({height:"toggle"})'>Categories</div>
+						<fieldset id="categories">
+							<!-- TODO REMOVE TABLES-->
+							<table id="cat_table">
+								<tr id="D">
+									<td><img/></td>
+									<td>Departments</td>
+									<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
+								</tr>
+								<tr id="H">
+									<td><img/></td>
+									<td>Hostels</td>
+									<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
+								</tr>
+								<tr id="A">
+									<td><img/></td>
+									<td>Academic Area</td>
+									<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
+								</tr>
+								<tr id="E">
+									<td><img/></td>
+									<td>Eateries</td>
+									<td><input type="checkbox" checked="checked" onchange='toggleMarkers(this);'/></td>
+								</tr>
+								<script type="text/javascript">
+									$("#cat_table img").each(function(elem){
+										$(this).attr("src",typeIconUrl($(this).parent().parent().attr("id")));
+									})
+								</script>
+							</table>
+						</fieldset>
+					</div>
 				</div>
+				<div id="map-canvas" class="col-md-10 col-xs-11" ></div>
+			</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
 	</body>
 </html>
