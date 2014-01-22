@@ -5,12 +5,19 @@ body { height: 100%; margin: 0; padding: 0 }
 	position:relative;
 	font-family: "Open Sans";
 }
-#map-canvas { height: 100%; }
+#map-canvas { 
+	top: 18%;
+	height: 82%;
+	margin-left: 18%;
+	width: 82%;
+}
+
 #control {
+	width: 18%;
 	position: absolute;
 	text-align: center;
 	height: 81.5%;
-	top: 18.5%;
+	top: 18%;
 	z-index: 200;
 	/*left: 5%;*/
 	background-color: white;
@@ -38,9 +45,9 @@ body { height: 100%; margin: 0; padding: 0 }
 	border-bottom-color: #4A8CF7;
 }
 .subtext .alpha-marker {
-	height:1.4em;
-	margin-left: -1.5%;
-	margin-bottom: -1%;
+	height:1.6em;
+	margin-left: 5%;
+	margin-bottom: -3.2%;
 }
 .subtext .alpha-marker:hover {
 	cursor: pointer;
@@ -51,6 +58,10 @@ body { height: 100%; margin: 0; padding: 0 }
 	width: 72%;
 	background-color: #FFF;
 	border: 1px solid #EEE;
+}
+
+.submit:hover {
+	cursor: pointer;
 }
 
 #mode_travel {
@@ -78,7 +89,7 @@ body { height: 100%; margin: 0; padding: 0 }
 
 #mode-icon-walk {
 	background-image: url("icons/modes.png");
-	background-position: 20px 156px;
+	background-position: 20px 136px;
 }
 
 #mode-icon-car {
@@ -118,6 +129,7 @@ body { height: 100%; margin: 0; padding: 0 }
 }
 
 #infobox ul li h3 {
+	height: 18%;
 	width: 100%;
 	text-align: left;
 	display: inline-block;
@@ -151,7 +163,7 @@ body { height: 100%; margin: 0; padding: 0 }
 }
 
 .classOverride {
-	border : 0px solid white;
+	max-width:80%;
 }
 
 .classOverride ul {
@@ -165,19 +177,47 @@ body { height: 100%; margin: 0; padding: 0 }
 	position: relative;
 	right: -98%;
 	bottom: 5%;
-	background: inherit;
+	background: white;
 	border-top-right-radius: 4%;
 	border-bottom-right-radius: 4%;
 	border : none;
 
 }
 #categorize {
-	background: inherit;
+	width:100%;
+	background: transparent;
 	position: absolute;
 	bottom: 0;
 }
 #categorize div{
-	width: 100%;
+	min-width: 100%;
 	position: absolute;
-	bottom: 5%;
+	bottom: 5px;
+}
+#directions {
+	width: 100%;
+	height: 260px;
+	overflow-y: auto;
+}
+
+.directionSteps {
+	font-size: 0.75em;
+	border-bottom: 1px rgba(200,200,200,0.55) solid;
+}
+
+.directionSteps:hover {
+	background-color: hsla(0, 21%, 88%, 0.22);
+	cursor: pointer;
+}
+
+.directionSteps div {
+	display: none;
+}
+
+.select2-offscreen {
+	display: none;
+}
+
+#cat_table {
+	width:100%;
 }
