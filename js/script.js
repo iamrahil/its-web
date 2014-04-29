@@ -1,6 +1,7 @@
 map=0;
 google.maps.visualRefresh = true;
 currentTravelMode=google.maps.TravelMode.WALKING;
+flights=[];
 function typeIconUrl(type_t) {
 	switch(type_t){
 		case "D":
@@ -51,11 +52,13 @@ function initialize() {
 	// google.maps.event.addListener(map, 'click', function(event) {
 	//placeMarker(event.latLng);
 	//});
-	markerA = new google.maps.Marker({map:map,icon:"icons/letter_a.png",draggable:true});
-	markerB = new google.maps.Marker({map:map,icon:"icons/letter_b.png",draggable:true});
-	$.ajax({url: "echo.php"}).done(
+	// markerA = new google.maps.Marker({map:map,icon:"icons/letter_a.png",draggable:true});
+	// markerB = new google.maps.Marker({map:map,icon:"icons/letter_b.png",draggable:true});
+	markerA = new google.maps.Marker({map:map,draggable:true});
+	markerB = new google.maps.Marker({map:map,draggable:true});
+	$.get('/api/v1/location/?format=json').success(
 		function(data){
-			data_array=JSON.parse(data);
+			data_array=data.objects;
 			markers = [];
 			for (i in data_array){
 				//Create Options for search
@@ -65,15 +68,26 @@ function initialize() {
 				$(".selectorsgroup").append(option);
 				//Create markers
 				var latlng = new google.maps.LatLng(data_array[i]["latitude"], data_array[i]["longitude"]);
+				
+				var whiteCircle = {
+				    path: google.maps.SymbolPath.CIRCLE,
+				    fillOpacity: 1.0,
+				    fillColor: "white",
+				    strokeOpacity: 1.0,
+				    strokeColor: "white",
+				    strokeWeight: 1.0,
+				    scale: 3.0
+				};
 				markers[data_array[i].id] = new google.maps.Marker(
 									{
 										position : latlng,
 										map : map,
 										title : data_array[i]["name"].toString().replace("_"," "),
-										type_t : data_array[i]["type"].toString(),
-										icon : typeIconUrl(data_array[i]["type"].toString())
+										type_t : data_array[i]["field_type"].toString(),
+										icon : whiteCircle
 									}
 								);
+				
 			}
 			$(".selectors").select2({containerCssClass : "classOverride",width : "80%"}).on("change",function(e){
 				if(this.getAttribute("id")=="origin_select"){
@@ -153,7 +167,43 @@ function updateDirections(display){
 	}
 
 }
-function direct() {
+
+function direct(){
+	var from_lat = markerA.position.lat();
+	var from_lng = markerA.position.lng();
+	var to_lat = markerB.position.lat();
+	var to_lng = markerB.position.lng();
+
+	$.get("/etch?from_lat="+from_lat+"&from_lng="+from_lng+"&to_lat="+to_lat+"&to_lng="+to_lng+"&access="+3)
+	 .success(function(data){
+	 	for(var seg in data.details){
+                drawPath(data.details[seg].path,data.details[seg].points,data.details[seg].length)
+        }
+	 })
+}
+
+function drawPath(path,points,length){
+
+    var locarray=[];
+    for(p in points){
+        var loc = new google.maps.LatLng(points[p]['k'],points[p]['A']);
+        locarray.push(loc);
+    }
+    var flightPath = new google.maps.Polyline({
+        path: locarray,
+        geodesic: true,
+
+        strokeColor: '#AABBCC',
+        strokeOpacity: 1.0,
+        strokeWeight: 3,
+
+        polylineID: path,
+        length: length,
+    });
+    flights.push(flightPath);
+    flightPath.setMap(map);
+}
+function old_direct() {
 	// s = new google.maps.LatLng(markerA.position.lb,markerA.position.mb);
 	// d = new google.maps.LatLng(markerB.position.lb,markerB.position.mb);
 	if(typeof(directionsDisplay)!="undefined"){
