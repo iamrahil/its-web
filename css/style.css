@@ -88,12 +88,12 @@ body { height: 100%; margin: 0; padding: 0 }
 }
 
 #mode-icon-walk {
-	background-image: url("icons/modes.png");
+	background-image: url("../icons/modes.png");
 	background-position: 20px 136px;
 }
 
 #mode-icon-car {
-	background-image: url("icons/modes.png");
+	background-image: url("../icons/modes.png");
 	background-position: 20px 235px;
 }
 

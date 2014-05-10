@@ -2,6 +2,7 @@ map=0;
 google.maps.visualRefresh = true;
 currentTravelMode=google.maps.TravelMode.WALKING;
 flights=[];
+order=[];
 function typeIconUrl(type_t) {
 	switch(type_t){
 		case "D":
@@ -21,7 +22,7 @@ function typeIconUrl(type_t) {
 	}
 	return "icons/"+url;
 }
-
+traveler = {"WALKING":3,"DRIVING":1};
 function toggler(e){
 	switch(e){
 		case 'car':
@@ -168,21 +169,45 @@ function updateDirections(display){
 
 }
 
+
+function directionsupdate(full){
+	elem = document.getElementById("directions");
+	var div = document.createElement("div");
+	div.innerHTML="Total Distance "+full+" meters";
+	elem.appendChild(div);
+	for(i in flights){
+		var con = flights[i];
+		var divv = document.createElement("div");
+		divv.innerHTML = con.polylineName + " : "+ parseInt(con.length) + "m";
+		divv.setAttribute("data-path",i);
+		$(divv).hover(function(event){
+			var i=parseInt(this.getAttribute("data-path"));
+			flights[i].setOptions({strokeWeight:8,strokeColor: "#DD2222"});
+		}, function(event){
+			var i=parseInt(this.getAttribute("data-path"));
+			flights[i].setOptions({strokeWeight:5,strokeColor: "#AABBCC"});
+		})
+		elem.appendChild(divv);
+	}
+}
+
 function direct(){
 	var from_lat = markerA.position.lat();
 	var from_lng = markerA.position.lng();
 	var to_lat = markerB.position.lat();
 	var to_lng = markerB.position.lng();
-
-	$.get("/etch?from_lat="+from_lat+"&from_lng="+from_lng+"&to_lat="+to_lat+"&to_lng="+to_lng+"&access="+3)
+	console.log("/etch?from_lat="+from_lat+"&from_lng="+from_lng+"&to_lat="+to_lat+"&to_lng="+to_lng+"&access="+traveler[currentTravelMode]);
+	$.get("/etch?from_lat="+from_lat+"&from_lng="+from_lng+"&to_lat="+to_lat+"&to_lng="+to_lng+"&access="+traveler[currentTravelMode])
 	 .success(function(data){
 	 	for(var seg in data.details){
-                drawPath(data.details[seg].path,data.details[seg].points,data.details[seg].length)
+                drawPath(data.details[seg].path,data.details[seg].points,data.details[seg].length,data.details[seg]['path_name'],seg)
+                order = data.array;
         }
+		directionsupdate(data.length)
 	 })
 }
 
-function drawPath(path,points,length){
+function drawPath(path,points,length,name,init){
 
     var locarray=[];
     for(p in points){
@@ -195,10 +220,12 @@ function drawPath(path,points,length){
 
         strokeColor: '#AABBCC',
         strokeOpacity: 1.0,
-        strokeWeight: 3,
+        strokeWeight: 5,
 
         polylineID: path,
         length: length,
+        polylineName: name,
+        init: init,
     });
     flights.push(flightPath);
     flightPath.setMap(map);
