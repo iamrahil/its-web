@@ -192,6 +192,14 @@ function directionsupdate(full){
 }
 
 function direct(){
+	//Clear previous things
+	//Clear Path
+	for(i in flights){
+		flights[i].setMap(null);
+	}
+
+	//Clear Directions
+	$("#directions").html("");
 	var from_lat = markerA.position.lat();
 	var from_lng = markerA.position.lng();
 	var to_lat = markerB.position.lat();
