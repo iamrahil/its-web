@@ -224,10 +224,19 @@ function direct(){
 	console.log("/etch?from_lat="+from_lat+"&from_lng="+from_lng+"&to_lat="+to_lat+"&to_lng="+to_lng+"&access="+traveler[currentTravelMode]);
 	$.get("/etch?from_lat="+from_lat+"&from_lng="+from_lng+"&to_lat="+to_lat+"&to_lng="+to_lng+"&access="+traveler[currentTravelMode])
 	 .success(function(data){
-	 	for(var seg in data.details){
+		var i=0;
+        drawPath(data.details["init"].path,data.details["init"].points,data.details["init"].length,data.details["init"].time,data.details["init"]['path_name'],i)
+		for(i in data.array){
+			var segment = data.details[data.array[i]];
+			if(segment != undefined){
+                drawPath(segment.path,segment.points,segment.length,segment.time,segment['path_name'],i+1)
+			}
+		}
+        drawPath(data.details["fin"].path,data.details["fin"].points,data.details["fin"].length,data.details["init"].time,data.details["fin"]['path_name'],i+1)
+	 	/*for(var seg in data.details){
                 drawPath(data.details[seg].path,data.details[seg].points,data.details[seg].length,data.details[seg].time,data.details[seg]['path_name'],seg)
                 order = data.array;
-        }
+        }*/
 		directionsupdate(data.length)
 	 })
 }
