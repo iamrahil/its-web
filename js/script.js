@@ -179,7 +179,7 @@ function directionsupdate(full){
 	divn.setAttribute("class","divn");
 	divd.setAttribute("class","divd");
 	divn.innerHTML = "Total Distance";
-	divd.innerHTML = full+"meter";
+	divd.innerHTML = full+" m";
 
 	div.appendChild(divn);
 	div.appendChild(divd);
@@ -192,7 +192,7 @@ function directionsupdate(full){
 		namespan.setAttribute("class","pathname")
 		lengthspan.setAttribute("class","lengthspan")
 		namespan.innerHTML = con.polylineName;
-		lengthspan.innerHTML =  parseInt(con.length) + "m";
+		lengthspan.innerHTML =  parseInt(con.length) + " m";
 		divv.appendChild(namespan);
 		divv.appendChild(lengthspan);
 		divv.setAttribute("data-path",i);
