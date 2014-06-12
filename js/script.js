@@ -173,13 +173,30 @@ function updateDirections(display){
 function directionsupdate(full){
 	elem = document.getElementById("directions");
 	var div = document.createElement("div");
-	div.innerHTML="Total Distance "+full+" meters";
+	div.setAttribute("class","direction-step head");
+	var divn = document.createElement("span");
+	var divd = document.createElement("span");
+	divn.setAttribute("class","divn");
+	divd.setAttribute("class","divd");
+	divn.innerHTML = "Total Distance";
+	divd.innerHTML = full+"meter";
+
+	div.appendChild(divn);
+	div.appendChild(divd);
 	elem.appendChild(div);
 	for(i in flights){
 		var con = flights[i];
 		var divv = document.createElement("div");
-		divv.innerHTML = con.polylineName + " : "+ parseInt(con.length) + "m";
+		var namespan = document.createElement("span");
+		var lengthspan = document.createElement("span");
+		namespan.setAttribute("class","pathname")
+		lengthspan.setAttribute("class","lengthspan")
+		namespan.innerHTML = con.polylineName;
+		lengthspan.innerHTML =  parseInt(con.length) + "m";
+		divv.appendChild(namespan);
+		divv.appendChild(lengthspan);
 		divv.setAttribute("data-path",i);
+		divv.setAttribute("class","direction-step");
 		$(divv).hover(function(event){
 			var i=parseInt(this.getAttribute("data-path"));
 			flights[i].setOptions({strokeWeight:8,strokeColor: "#DD2222"});
@@ -208,14 +225,14 @@ function direct(){
 	$.get("/etch?from_lat="+from_lat+"&from_lng="+from_lng+"&to_lat="+to_lat+"&to_lng="+to_lng+"&access="+traveler[currentTravelMode])
 	 .success(function(data){
 	 	for(var seg in data.details){
-                drawPath(data.details[seg].path,data.details[seg].points,data.details[seg].length,data.details[seg]['path_name'],seg)
+                drawPath(data.details[seg].path,data.details[seg].points,data.details[seg].length,data.details[seg].time,data.details[seg]['path_name'],seg)
                 order = data.array;
         }
 		directionsupdate(data.length)
 	 })
 }
 
-function drawPath(path,points,length,name,init){
+function drawPath(path,points,length,time,name,init){
 
     var locarray=[];
     for(p in points){
@@ -232,6 +249,7 @@ function drawPath(path,points,length,name,init){
 
         polylineID: path,
         length: length,
+        time: time,
         polylineName: name,
         init: init,
     });

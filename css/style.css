@@ -195,9 +195,21 @@ body { height: 100%; margin: 0; padding: 0 }
 	bottom: 5px;
 }
 #directions {
+	display: table;
 	width: 100%;
 	height: 260px;
 	overflow-y: auto;
+}
+
+.direction-step {
+	display: table-row;
+}
+
+.direction-step .head {
+}
+
+.divn, .divd, .pathname, .lengthspan {
+	display: table-cell;
 }
 
 .directionSteps {
