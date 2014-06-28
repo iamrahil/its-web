@@ -6,8 +6,8 @@ body { height: 100%; margin: 0; padding: 0 }
 	font-family: "Open Sans";
 }
 #map-canvas { 
-	top: 18%;
-	height: 82%;
+	top: 0%;
+	height: 100%;
 	margin-left: 18%;
 	width: 82%;
 }
@@ -16,8 +16,8 @@ body { height: 100%; margin: 0; padding: 0 }
 	width: 18%;
 	position: absolute;
 	text-align: center;
-	height: 81.5%;
-	top: 18%;
+	height: 100%;
+	top: 0%;
 	z-index: 200;
 	/*left: 5%;*/
 	background-color: white;
@@ -188,6 +188,7 @@ body { height: 100%; margin: 0; padding: 0 }
 	background: transparent;
 	position: absolute;
 	bottom: 0;
+	z-index: -1;
 }
 #categorize div{
 	min-width: 100%;
